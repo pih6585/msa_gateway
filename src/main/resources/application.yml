@@ -1,0 +1,25 @@
+server:
+  port: 8000
+
+spring:
+  application:
+    name:msaTesteureke
+
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://127.0.0.1:8761/eureka
+
+#  cloud:
+#    gateway:
+#      routes:
+#        - id: first-service
+#          url: http://localhost:8081/
+#          predicate:
+#           - Path=/first-service/**
+#        - id: first-service
+#          url: http://localhost:8081/
+#          predicate:
+#            - Path=/first-service/**
