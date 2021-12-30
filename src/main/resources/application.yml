@@ -12,14 +12,30 @@ eureka:
     service-url:
       defaultZone: http://127.0.0.1:8761/eureka
 
-#  cloud:
-#    gateway:
-#      routes:
-#        - id: first-service
-#          url: http://localhost:8081/
-#          predicate:
-#           - Path=/first-service/**
-#        - id: first-service
-#          url: http://localhost:8081/
-#          predicate:
-#            - Path=/first-service/**
+  cloud:
+    gateway:
+      # 글로벌 필터 에 관련된 내용
+      default-filter:
+        - name: GlobalFilter
+          args:
+            baseMessage: String Cloud Gateway GlobalFilter
+            preLogger: true
+            postLogger : true
+
+      routes:
+        - id: first-service
+          url: http://localhost:8081/
+          predicate:
+           - Path=/first-service/**
+          filters:
+#            - AddRequestHeader=first-request, first-request-header2
+#            - AddResponseHeader=first-response, first-response-header2
+        - CustomFilter
+        - id: first-service
+          url: http://localhost:8081/
+          predicate:
+            - Path=/first-service/**
+          filters:
+#            - AddRequestHeader=first-request, first-request-header2
+#            - AddResponseHeader=first-response, first-response-header2
+            - CustomFilter
